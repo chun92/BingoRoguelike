@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private int xPoint;
     private int yPoint;
+    
+    SpriteRenderer boundary;
+    SpriteRenderer unit;
 
     public Tile()
     {
@@ -40,15 +44,34 @@ public class Tile : MonoBehaviour
         return new Vector2(xPosition * (width + TileMap.padding), yPosition * (height + TileMap.padding));
     }
 
-    // Start is called before the first frame update
-    void Start()
+
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        unit.color = Color.green;
+    }
+    
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        unit.color = Color.white;
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        unit.color = Color.cyan;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        addPhysics2DRaycaster();
+        boundary = transform.Find("Boundary").GetComponent<SpriteRenderer>();
+        unit = transform.Find("Boundary").Find("Unit").GetComponent<SpriteRenderer>();
+    }
+    
+    private void addPhysics2DRaycaster()
+    {
+        Physics2DRaycaster physicsRaycaster = GameObject.FindObjectOfType<Physics2DRaycaster>();
+        if (physicsRaycaster == null)
+        {
+            Camera.main.gameObject.AddComponent<Physics2DRaycaster>();
+        }
     }
 }

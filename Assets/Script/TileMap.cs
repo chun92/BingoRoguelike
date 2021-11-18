@@ -27,7 +27,6 @@ public class TileMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void setTileMapSize(int size) 
