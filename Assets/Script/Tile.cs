@@ -9,7 +9,10 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private int yPoint;
     
     SpriteRenderer boundary;
-    SpriteRenderer unit;
+    SpriteRenderer unitRenderer;
+    
+    private UnitInfo unitInfo;
+    private Unit unit;
 
     public Tile()
     {
@@ -47,23 +50,31 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        unit.color = Color.green;
+        unitInfo.setUnitInfo(unit);
+        unitInfo.setActive(true);
+        unitRenderer.color = Color.green;
     }
-    
     public void OnPointerExit(PointerEventData eventData)
     {
-        unit.color = Color.white;
+        unitInfo.setActive(false);
+        unitRenderer.color = Color.white;
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        unit.color = Color.cyan;
+        unitRenderer.color = Color.cyan;
+        
     }
 
     void Start()
     {
         addPhysics2DRaycaster();
         boundary = transform.Find("Boundary").GetComponent<SpriteRenderer>();
-        unit = transform.Find("Boundary").Find("Unit").GetComponent<SpriteRenderer>();
+        unitRenderer = transform.Find("Boundary").Find("Unit").GetComponent<SpriteRenderer>();
+        
+        // XXX: temporally test code
+        unit = new Unit("Hero", Resources.Load<Sprite>("Images/RubberDuck"));
+        unit.addSkill(new Skill("umbrella", "shild!!", Resources.Load<Sprite>("Images/Umbrella"), 1));
+        unitInfo = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("Panel").Find("UnitInfo").GetComponent<UnitInfo>();
     }
     
     private void addPhysics2DRaycaster()
