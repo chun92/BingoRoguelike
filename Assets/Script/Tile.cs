@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Tile : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class Tile : MonoBehaviour, IPointerEnterHandler
 {
     private int xPoint;
     private int yPoint;
@@ -50,19 +50,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        unitInfo.setUnitInfo(unit);
+        unitInfo.setUnitInfo(unit, eventData.position);
         unitInfo.setActive(true);
-        unitRenderer.color = Color.green;
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        unitInfo.setActive(false);
-        unitRenderer.color = Color.white;
-    }
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        unitRenderer.color = Color.cyan;
-        
     }
 
     void Start()
