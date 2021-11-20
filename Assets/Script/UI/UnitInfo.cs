@@ -13,6 +13,18 @@ public class UnitInfo : MonoBehaviour, IPointerExitHandler
     private Transform skillInfoContent;
     private List<GameObject> skillInfos = null;
 
+    private static UnitInfo unitInfo = null;
+
+    public static UnitInfo getInstance()
+    {
+        if (unitInfo == null)
+        {
+            unitInfo = GameObject.FindGameObjectWithTag("MainCanvas").transform.Find("Panel").Find("UnitInfo").GetComponent<UnitInfo>();
+        }
+        return unitInfo;
+    }
+    
+
     public void setUnitInfo(Unit unit, Vector3 position)
     {
         RectTransform rect = transform.GetComponent<RectTransform>();

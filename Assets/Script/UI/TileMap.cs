@@ -11,11 +11,11 @@ public class TileMap : MonoBehaviour
 
     public int currentTileMapSize = 1;
     
-    private Dictionary<Vector2Int, Tile> tileInfo;
+    private Dictionary<Vector2Int, Tile> tiles;
 
     void Start()
     {
-        tileInfo = new Dictionary<Vector2Int, Tile>();
+        tiles = new Dictionary<Vector2Int, Tile>();
         createTileMap(currentTileMapSize);
     }
 
@@ -27,11 +27,13 @@ public class TileMap : MonoBehaviour
 
     public void createTileMap(int size)
     {
+        int idCount = 0;
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
             {
-                createTile(i, j, size);
+                createTile(idCount, i, j, size);
+                idCount++;
             }
         }
         
@@ -39,19 +41,20 @@ public class TileMap : MonoBehaviour
         rect.sizeDelta = new Vector2(tileWidth * size + padding * (size - 1), tileHeight * size + padding * (size - 1));
     }
 
-    public void createTile(int x, int y, int num) 
+    public void createTile(int id, int x, int y, int num) 
     {
         GameObject tileObject = (GameObject) Instantiate(ResourceManager.tilePrefab, transform);
-        Tile tile = tileObject.GetComponent<Tile>();
-        Vector2 size = tile.setTilePosition(x, y, num);
+        Tile tile = new Tile(id, x, y, num, null);
+        TileUI tileUI = tileObject.GetComponent<TileUI>();
+        Vector2 size = tileUI.setTileUI(tile);
         tileWidth = size.x;
         tileHeight = size.y;
 
-        tileInfo.Add(new Vector2Int(x, y), tile);
+        tiles.Add(new Vector2Int(x, y), tile);
     }
 
     public Tile getTileWithPosition(int x, int y)
     {
-        return tileInfo[new Vector2Int(x, y)];
+        return tiles[new Vector2Int(x, y)];
     }
 }
