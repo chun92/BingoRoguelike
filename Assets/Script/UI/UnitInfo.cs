@@ -9,11 +9,13 @@ public class UnitInfo : MonoBehaviour
     
     private Object skillInfoPrefab;
     private Transform skillInfoContent;
+    private List<GameObject> skillInfos = null;
 
     public void setUnitInfo(Unit unit)
     {        
         transform.Find("Panel").Find("Name").GetComponent<Text>().text = unit.name;
         transform.Find("Panel").Find("Image").GetComponent<Image>().sprite = unit.image;
+        clearSkillInfos();
         unit.loopSkills(setSkillInfos);
     }
 
@@ -28,5 +30,22 @@ public class UnitInfo : MonoBehaviour
         skillInfoContent = transform.Find("Panel").Find("SkillBoard").Find("Scroll View").Find("Viewport").Find("Content");
         GameObject skillInfoObject = (GameObject) Instantiate(skillInfoPrefab, skillInfoContent);
         skillInfoObject.GetComponent<SkillInfo>().setSkillInfo(skill, index);
+
+        if (skillInfos == null) {
+            skillInfos = new List<GameObject>();
+        }
+        skillInfos.Add(skillInfoObject);
+    }
+
+    public void clearSkillInfos()
+    {
+        if (skillInfos == null) {
+            skillInfos = new List<GameObject>();
+        }
+        foreach(GameObject skill in skillInfos)
+        {
+            Destroy(skill);
+        }
+        skillInfos.Clear();
     }
 }

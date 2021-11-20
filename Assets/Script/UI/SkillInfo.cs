@@ -7,7 +7,7 @@ public class SkillInfo : MonoBehaviour
 {
 
     private int id;
-    private const float yDefaultPadding = -5.0f;
+    private const float yDefaultPadding = -0f;
     private const float yDefaultHeight = -40.0f;
 
     private Skill skill;
@@ -26,7 +26,7 @@ public class SkillInfo : MonoBehaviour
 
         RectTransform rect = transform.GetComponent<RectTransform>();
         Vector3 defaultPosition = rect.position;
-        Vector3 newPosition = new Vector3(defaultPosition.x, yDefaultPadding + id * yDefaultHeight, defaultPosition.z);
+        Vector3 newPosition = new Vector3(defaultPosition.x, defaultPosition.y + yDefaultPadding + id * yDefaultHeight, defaultPosition.z);
         rect.position = newPosition;
     }
 }
