@@ -6,13 +6,23 @@ public class Unit
 {
     public string name { get; }
     public Sprite image { get; }
-    private List<Skill> skills;
+    public List<Skill> skills;
+    public int id;
 
-    public Unit(string name, Sprite image)
+    public Unit(string name, Sprite image, int id)
     {
         this.name = name;
         this.image = image;
         skills = new List<Skill>();
+        this.id = id;
+    }
+    
+    public Unit(string name, Sprite image, List<Skill> skills, int id)
+    {
+        this.name = name;
+        this.image = image;
+        this.skills = skills;
+        this.id = id;
     }
 
     public delegate void skillCallback(Skill s, int index);

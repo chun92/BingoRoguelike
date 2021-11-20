@@ -7,7 +7,7 @@ public class Skill
     public string name { get; }
     public string text { get; }
     public Sprite image { get; }
-    private int id { get; }
+    public int id { get; }
 
     public Skill(string name, string text, Sprite image, int id)
     {

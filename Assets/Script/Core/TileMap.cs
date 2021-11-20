@@ -32,6 +32,13 @@ public class TileMap
 
     public Tile getTile(int x, int y)
     {
-        return tiles[new Vector2Int(x, y)];
+        Vector2Int key = new Vector2Int(x, y);
+        if (tiles.ContainsKey(key))
+        {
+            return tiles[key];
+        } else
+        {
+            return null;
+        }
     }
 }
