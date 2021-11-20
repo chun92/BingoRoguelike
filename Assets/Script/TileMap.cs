@@ -10,24 +10,15 @@ public class TileMap : MonoBehaviour
 
 
     public int currentTileMapSize = 1;
-    private Object tilePrefab;
-    private GridLayout gridLayout;
     
     private Dictionary<Vector2Int, Tile> tileInfo;
 
-    // Start is called before the first frame update
     void Start()
     {
-        tilePrefab = Resources.Load("Prefabs/tile");
-        gridLayout = gameObject.GetComponent<GridLayout>();
         tileInfo = new Dictionary<Vector2Int, Tile>();
         createTileMap(currentTileMapSize);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     public void setTileMapSize(int size) 
     {
@@ -50,7 +41,7 @@ public class TileMap : MonoBehaviour
 
     public void createTile(int x, int y, int num) 
     {
-        GameObject tileObject = (GameObject) Instantiate(tilePrefab, transform);
+        GameObject tileObject = (GameObject) Instantiate(ResourceManager.tilePrefab, transform);
         Tile tile = tileObject.GetComponent<Tile>();
         Vector2 size = tile.setTilePosition(x, y, num);
         tileWidth = size.x;

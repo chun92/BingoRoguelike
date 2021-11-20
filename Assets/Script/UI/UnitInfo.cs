@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class UnitInfo : MonoBehaviour
 {
     private Unit unit;
-    
-    private Object skillInfoPrefab;
     private Transform skillInfoContent;
     private List<GameObject> skillInfos = null;
 
@@ -15,6 +13,7 @@ public class UnitInfo : MonoBehaviour
     {        
         transform.Find("Panel").Find("Name").GetComponent<Text>().text = unit.name;
         transform.Find("Panel").Find("Image").GetComponent<Image>().sprite = unit.image;
+        skillInfoContent = transform.Find("Panel").Find("SkillBoard").Find("Scroll View").Find("Viewport").Find("Content");
         clearSkillInfos();
         unit.loopSkills(setSkillInfos);
     }
@@ -26,9 +25,7 @@ public class UnitInfo : MonoBehaviour
 
     public void setSkillInfos(Skill skill, int index)
     {
-        skillInfoPrefab = Resources.Load("Prefabs/UI/SkillInfo");
-        skillInfoContent = transform.Find("Panel").Find("SkillBoard").Find("Scroll View").Find("Viewport").Find("Content");
-        GameObject skillInfoObject = (GameObject) Instantiate(skillInfoPrefab, skillInfoContent);
+        GameObject skillInfoObject = (GameObject) Instantiate(ResourceManager.skillInfoPrefab, skillInfoContent);
         skillInfoObject.GetComponent<SkillInfo>().setSkillInfo(skill, index);
 
         if (skillInfos == null) {
