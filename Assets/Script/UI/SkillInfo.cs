@@ -8,7 +8,7 @@ public class SkillInfo : MonoBehaviour
 
     private int id;
     private const float yDefaultPadding = -0f;
-    private const float yDefaultHeight = -40.0f;
+    private const float yDefaultHeight = -35.0f;
 
     private Skill skill;
     
