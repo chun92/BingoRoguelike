@@ -17,9 +17,12 @@ public class TileUI : MonoBehaviour, IPointerEnterHandler
     {
         this.xPoint = tile.x;
         this.yPoint = tile.y;
-        getUnitRenderer().sprite = tile.unit.image;
+        if (tile.unit != null)
+        {
+            getUnitRenderer().sprite = tile.unit.image;
+        }
         this.tile = tile;
-        
+
         return setTilePosition(tile.x, tile.y, tile.tileNumInMap);
     }
 
@@ -42,7 +45,7 @@ public class TileUI : MonoBehaviour, IPointerEnterHandler
         float height = size.y;
         float xPosition = -num/2.0f + 0.5f + x;
         float yPosition = -num/2.0f + 0.5f + y;
-        return new Vector2(xPosition * (width + TileMap.padding), yPosition * (height + TileMap.padding));
+        return new Vector2(xPosition * (width + TileMapUI.padding), yPosition * (height + TileMapUI.padding));
     }
 
     public void OnPointerEnter(PointerEventData eventData)

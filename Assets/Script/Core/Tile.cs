@@ -17,8 +17,5 @@ public class Tile
         this.y = y;
         this.tileNumInMap = tileNumInMap;
         this.unit = unit;
-        // XXX: temporally test code
-        this.unit = new Unit("Hero", Resources.Load<Sprite>("Images/RubberDuck"));
-        this.unit.addSkill(new Skill("umbrella", "shild!!", Resources.Load<Sprite>("Images/Umbrella"), 1));
     }
 }
