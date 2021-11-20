@@ -22,8 +22,17 @@ public class TileUI : MonoBehaviour, IPointerEnterHandler
             getUnitRenderer().sprite = tile.unit.image;
         }
         this.tile = tile;
+        tile.ui = this;
 
         return setTilePosition(tile.x, tile.y, tile.tileNumInMap);
+    }
+
+    public void addUnit(Unit unit)
+    {
+        if (tile.unit != null)
+        {
+            getUnitRenderer().sprite = tile.unit.image;
+        }
     }
 
     private Vector2 setTilePosition(int x, int y, int num)
