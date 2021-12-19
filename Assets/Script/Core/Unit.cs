@@ -1,28 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Unit
+[Serializable]
+public class UnitRawData : RawData
 {
-    public string name { get; }
-    public Sprite image { get; }
-    public List<Skill> skills;
-    public int id;
+    public int[] skills;
+}
 
-    public Unit(string name, Sprite image, int id)
+public class Unit : BaseObject
+{
+    public List<Skill> skills;
+
+    public Unit() : base()
     {
-        this.name = name;
-        this.image = image;
+
+    }
+
+    public Unit(int id, string name, Sprite image) : base(id, name, image)
+    {
         skills = new List<Skill>();
-        this.id = id;
     }
     
-    public Unit(string name, Sprite image, List<Skill> skills, int id)
+    public Unit(int id, string name, Sprite image, List<Skill> skills) : base(id, name, image)
     {
-        this.name = name;
-        this.image = image;
         this.skills = skills;
-        this.id = id;
     }
 
     public delegate void skillCallback(Skill s, int index);

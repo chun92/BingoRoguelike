@@ -11,8 +11,8 @@ public class ResourceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SkillFactory.getInstance().loadAllSkills();
-        UnitFactory.getInstance().loadAllUnits();
+        SkillFactory.getInstance().loadAll();
+        UnitFactory.getInstance().loadAll();
 
 
         skillInfoPrefab = Resources.Load("Prefabs/UI/SkillInfo");

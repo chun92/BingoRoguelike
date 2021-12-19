@@ -1,20 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Skill 
+[Serializable]
+public class SkillRawData : RawData
+{
+    public string text;
+}
+
+public class Skill : BaseObject
 {   
-    public string name { get; }
-    public string text { get; }
-    public Sprite image { get; }
-    public int id { get; }
+    public string text { set; get; }
 
-    public Skill(string name, string text, Sprite image, int id)
+    public Skill() : base()
     {
-        this.name = name;
+    }
+
+    public Skill(int id, string name, Sprite image, string text) : base(id, name, image)
+    {
         this.text = text;
-        this.image = image;
-        this.id = id;
     }
 
     public bool isSameSkill(Skill other)

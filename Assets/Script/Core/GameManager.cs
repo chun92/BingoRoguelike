@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     void addUnit(string name, int x, int y)
     {
-        addUnit(UnitFactory.getInstance().getUnit(name), tileMap.getTile(x, y));
+        addUnit(UnitFactory.getInstance().get(name), tileMap.getTile(x, y));
     }
 
     void addUnit(Unit unit, Tile tile)
